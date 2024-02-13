@@ -18,51 +18,50 @@ class _MyListState extends State<MyList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () {
-            GoRouter.of(context).go("/");
-          },
+        appBar: AppBar(
+          backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+          leading: IconButton(
+            icon: const Icon(Icons.arrow_back),
+            onPressed: () {
+              GoRouter.of(context).go("/");
+            },
+          ),
+          title: const Text("Liste des Pokemons"),
         ),
-        title: const Text("Liste des Pokemons"),
-      ),
-      body: BlocBuilder(
-          bloc: pokemonCubit,
-          builder: (context, pokemon) {
-            final pokemonList = pokemonCubit.state;
-            return Column(
-              children: [
-                TextButton(
-                  onPressed: () {
-                    pokemonCubit.getPokemonType();
-                  },
-                  style: TextButton.styleFrom(
-                      padding: const EdgeInsets.all(24.0),
-                      backgroundColor: const Color.fromARGB(255, 106, 61, 255)),
-                  child: const Text(
-                    "Navigate to API fetch result",
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ),
-                const SizedBox(height: 30),
-                Expanded(
-                  child: ListView.builder(
-                      itemCount: pokemonList
-                          .length, // Ajoutez itemCount pour définir le nombre d'éléments.
-                      itemBuilder: (context, index) {
-                        return ListTile(
-                          title: Center(
-                              child: GestureDetector(
-                                  onTap: () {},
-                                  child: Text(pokemonList[index]))),
-                        );
-                      }),
-                ),
-              ],
-            );
-          }),
-    );
+        body: Column(
+          children: [
+            TextButton(
+              onPressed: () {
+                pokemonCubit.getPokemonType();
+              },
+              style: TextButton.styleFrom(
+                  padding: const EdgeInsets.all(24.0),
+                  backgroundColor: const Color.fromARGB(255, 106, 61, 255)),
+              child: const Text(
+                "Navigate to API fetch result",
+                style: TextStyle(color: Colors.white),
+              ),
+            ),
+            const SizedBox(height: 30),
+            BlocBuilder(
+                bloc: pokemonCubit,
+                builder: (context, pokemon) {
+                  final pokemonList = pokemonCubit.state;
+                  return Expanded(
+                    child: ListView.builder(
+                        itemCount: pokemonList
+                            .length, // Ajoutez itemCount pour définir le nombre d'éléments.
+                        itemBuilder: (context, index) {
+                          return ListTile(
+                            title: Center(
+                                child: GestureDetector(
+                                    onTap: () {},
+                                    child: Text(pokemonList[index]))),
+                          );
+                        }),
+                  );
+                })
+          ],
+        ));
   }
 }
