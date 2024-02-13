@@ -1,4 +1,3 @@
-import 'package:bloc_tutorial/cubit/counter_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -23,7 +22,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final counterCubit = CounterCubit();
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
