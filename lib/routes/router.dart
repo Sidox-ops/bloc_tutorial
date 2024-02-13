@@ -18,7 +18,7 @@ class MyRoutes {
         path: '/liste',
         name: 'liste',
         pageBuilder: (context, state) {
-          return const MaterialPage(child: List());
+          return const MaterialPage(child: MyList());
         })
   ]);
 }

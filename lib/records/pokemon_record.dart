@@ -14,15 +14,4 @@ class Pokemon {
     required this.sprite,
     required this.stats,
   });
-
-  factory Pokemon.fromJson(Map<String, dynamic> json) {
-    return Pokemon(
-      id: json['id'],
-      pokedexId: json['pokedexId'],
-      name: json['name'],
-      image: json['image'],
-      sprite: json['sprite'],
-      stats: json['stats'],
-    );
-  }
 }

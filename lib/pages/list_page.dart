@@ -1,18 +1,20 @@
 import 'package:bloc_tutorial/cubit/pokemon_cubit.dart';
+import 'package:bloc_tutorial/services/pokemon_services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
-class List extends StatefulWidget {
-  const List({super.key});
+class MyList extends StatefulWidget {
+  const MyList({super.key});
 
   @override
-  State<List> createState() => _ListState();
+  State<MyList> createState() => _MyListState();
 }
 
-class _ListState extends State<List> {
+class _MyListState extends State<MyList> {
   final pokemonCubit = PokemonCubit();
+  final pokemonService = PokemonService();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,11 +32,36 @@ class _ListState extends State<List> {
           bloc: pokemonCubit,
           builder: (context, pokemon) {
             final pokemonList = pokemonCubit.state;
-            return ListView.builder(itemBuilder: (context, index) {
-              return ListTile(
-                title: Text(pokemonList[index].name),
-              );
-            });
+            return Column(
+              children: [
+                TextButton(
+                  onPressed: () {
+                    pokemonCubit.getPokemonType();
+                  },
+                  style: TextButton.styleFrom(
+                      padding: const EdgeInsets.all(24.0),
+                      backgroundColor: const Color.fromARGB(255, 106, 61, 255)),
+                  child: const Text(
+                    "Navigate to API fetch result",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
+                const SizedBox(height: 30),
+                Expanded(
+                  child: ListView.builder(
+                      itemCount: pokemonList
+                          .length, // Ajoutez itemCount pour définir le nombre d'éléments.
+                      itemBuilder: (context, index) {
+                        return ListTile(
+                          title: Center(
+                              child: GestureDetector(
+                                  onTap: () {},
+                                  child: Text(pokemonList[index]))),
+                        );
+                      }),
+                ),
+              ],
+            );
           }),
     );
   }
