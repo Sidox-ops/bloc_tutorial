@@ -1,8 +1,5 @@
 import 'dart:convert';
-
-import 'package:bloc_tutorial/records/pokemon_record.dart';
 import 'package:bloc_tutorial/services/pokemon_services.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:http/http.dart' as http;
 
