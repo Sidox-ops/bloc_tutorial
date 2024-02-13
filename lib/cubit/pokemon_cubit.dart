@@ -9,8 +9,9 @@ class PokemonCubit extends Cubit {
 
   static const String api = 'https://pokebuildapi.fr/api/v1/';
   Future<void> getPokemonType() async {
+    final pokemonService = PokemonService();
     try {
-      final response = await http.get(Uri.parse('${api}types'));
+      final response = await pokemonService.fetch('types');
       if (response.statusCode == 200) {
         final List<dynamic> jsonData = jsonDecode(response.body);
         final pokemonService = PokemonService();
@@ -24,9 +25,10 @@ class PokemonCubit extends Cubit {
     }
   }
 
-  Future<void> getPokemonByType(BuildContext context ,String type) async {
+  Future<void> getPokemonByType(BuildContext context, String type) async {
+    final pokemonService = PokemonService();
     try {
-      final response = await http.get(Uri.parse('${api}pokemon/type/$type'));
+      final response = await pokemonService.fetch('pokemon/type/$type');
       if (response.statusCode == 200) {
         final List<dynamic> jsonData = jsonDecode(response.body);
         final pokemonService = PokemonService();

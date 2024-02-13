@@ -1,6 +1,7 @@
+import 'package:bloc_tutorial/services/api_services.dart';
 import 'package:flutter/material.dart';
 
-class PokemonService {
+class PokemonService extends ApiServices {
   List<String> pokemonType(List<dynamic> jsonArray) {
     return jsonArray.map((json) => json['name'] as String).toList();
   }
