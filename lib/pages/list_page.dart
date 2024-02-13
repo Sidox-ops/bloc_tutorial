@@ -13,10 +13,11 @@ class MyList extends StatefulWidget {
 }
 
 class _MyListState extends State<MyList> {
-  final pokemonCubit = PokemonCubit();
   final pokemonService = PokemonService();
   @override
   Widget build(BuildContext context) {
+    final pokemonCubit = BlocProvider.of<PokemonCubit>(context);
+
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Theme.of(context).colorScheme.inversePrimary,
@@ -55,7 +56,10 @@ class _MyListState extends State<MyList> {
                           return ListTile(
                             title: Center(
                                 child: GestureDetector(
-                                    onTap: () {},
+                                    onTap: () {
+                                      pokemonCubit.getPokemonByType(
+                                          context, pokemonList[index]);
+                                    },
                                     child: Text(pokemonList[index]))),
                           );
                         }),

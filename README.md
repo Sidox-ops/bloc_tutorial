@@ -22,5 +22,8 @@ go_router => by flutter.dev, good pratice navigation
 
 concernant la question de classe ou record :
     Undefined class 'record'. Try changing the name to the name of an existing class, or creating a class with the name 'record'.dartundefined_class
+bien que la version de dart soit 3.2.6
 
-    bien que la version de dart soit 3.2.6
+
+
+bloc vscode exctension, pour gagner du temps, by felix angelov, createur du package bloc.
