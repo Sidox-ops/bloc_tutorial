@@ -7,21 +7,16 @@ import 'package:http/http.dart' as http;
 class PokemonCubit extends Cubit {
   PokemonCubit() : super([]);
 
-  static const String api = 'https://pokebuildapi.fr/api/v1/';
   Future<void> getPokemonType() async {
     final pokemonService = PokemonService();
-    try {
-      final response = await pokemonService.fetch('types');
-      if (response.statusCode == 200) {
-        final List<dynamic> jsonData = jsonDecode(response.body);
-        final pokemonService = PokemonService();
-        final pokemonTypes = pokemonService.pokemonType(jsonData);
-        emit(pokemonTypes);
-      } else {
-        print('Failed to load pokemons');
-      }
-    } catch (e) {
-      print(e.toString());
+    final response = await pokemonService.fetch('types');
+    if (response.statusCode == 200) {
+      final List<dynamic> jsonData = jsonDecode(response.body);
+      final pokemonService = PokemonService();
+      final pokemonTypes = pokemonService.pokemonType(jsonData);
+      emit([...pokemonTypes]);
+    } else {
+      emit([...state, 'Failed to load pokemons']);
     }
   }
 
