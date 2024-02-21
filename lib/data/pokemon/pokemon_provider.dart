@@ -1,14 +1,18 @@
+import 'package:bloc_tutorial/data/models/pokemon_types_model.dart';
 import 'package:bloc_tutorial/services/api_services.dart';
 import 'package:http/http.dart' as http;
 
 class PokemonProvider {
   // voir singleton ou injection de dépendance pour ne pas instancier à chaque fois un api service
-  final ApiServices _apiServices = ApiServices();
+  final ApiServices _apiServices = ApiServices.getApiServices();
 
   // créer dto conforme à objet api avant de créer le mien dans repository
   // faire sans http.response
-  Future<http.Response> fetchPokemonTypes() {
-    return _apiServices.fetch('types');
+  Future<List<PokemonType>> fetchPokemonTypes() {
+    return _apiServices.fetch('types').then((response) {
+      final List<dynamic> jsonResponse = response as List<dynamic>;
+      return jsonResponse.map((jsonType) => PokemonType.fromJson(jsonType)).toList();
+    });
   }
 
   /*
@@ -19,7 +23,7 @@ class PokemonProvider {
   }
   */
 
-  Future<http.Response> fetchPokemonByType(String type) {
+  Future fetchPokemonByType(String type) {
     return _apiServices.fetch('pokemon/type/$type');
   }
 }
