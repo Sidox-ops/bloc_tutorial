@@ -1,9 +1,15 @@
 import 'package:bloc_tutorial/services/api_services.dart';
 import 'package:flutter/material.dart';
 
-class PokemonService extends ApiServices {
+class PokemonService {
+  final ApiServices _apiServices = ApiServices.getApiServices();
+
   List<String> pokemonType(List<dynamic> jsonArray) {
     return jsonArray.map((json) => json['name'] as String).toList();
+  }
+
+  Future fetch(String path) {
+    return _apiServices.fetch(path);
   }
 
   void showModal(BuildContext context, List<String> contents) {

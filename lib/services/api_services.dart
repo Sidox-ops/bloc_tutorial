@@ -14,7 +14,7 @@ class ApiServices {
   }
 
   Future fetch(String path) {
-    final String api = 'https://pokebuildapi.fr/api/v1/$path/error';
+    final String api = 'https://pokebuildapi.fr/api/v1/$path';
     return http.get(Uri.parse(api));
   }
 }
